@@ -2,6 +2,9 @@
     margin:0;
     padding: 0;
 }
+.dark a{
+    color: white;
+}
 .dark{
     background-color: black;
     color: white;
@@ -9,4 +12,42 @@
 .light{
     background-color: white;
     color: black;
+}
+
+h1{
+    text-align: center;
+    padding: 20px;
+    font-size: 50px;
+}
+
+header ul{
+    display: flex;
+    justify-content: center;
+}
+header ul li{
+    list-style-type: none;
+    width: 160px;
+    text-align: center;
+    margin: 20px;
+}
+
+main{
+    margin: 25px;
+}
+main h2{
+    text-align: center;
+}
+article{
+    padding: 10px;
+    text-align: center;
+    margin-top: 20px;
+}
+.dark article{
+    background-color: rgba(255, 255, 255, 0.1);
+}
+.light article{
+    background-color: rgba(0, 0, 0, 0.1);
+}
+article h2{
+    margin-top: 30px;
 }
