@@ -50,3 +50,18 @@ header h1{
 .rules .read button{
     padding: 6px;
 }
+
+.board{
+    width: 70%;
+    margin: 0 auto;
+    background-color: rgb(221, 195, 219);
+}
+
+.board img {
+    width: 25%;
+    vertical-align: bottom;
+}
+
+main button {
+    background-color: brown;
+}
