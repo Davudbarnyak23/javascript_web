@@ -65,25 +65,23 @@ function shoot(event) {
         gridDivs[currentShootIndex].classList.remove('shoot')
         currentShootIndex -= gridWidth
 
-        if (gridDivs[currentShootIndex].classList.add('s'))
-            clearInterval(setIntervalIndex)
+        if (gridDivs[currentShootIndex].classList.add('shoot'))
+            clearInterval(shootIntervalId)
+        
         gridDivs[currentShootIndex].classList.add('shoot')
 
-        if(currentShootIndex < 0)
-            clearInterval(setIntervalIndex)
+        if (currentShootIndex < 0)
+            clearInterval(shootIntervalId)
 
-        if (gridDivs[currentShootIndex].classList.contains('bomb')){
-            (gridDivs[currentShootIndex].classList.remove('bomb'))
-            (gridDivs[currentShootIndex].classList.add('explosion'))
+        if (gridDivs[currentShootIndex].classList.contains('bomb')) {
+            gridDivs[currentShootIndex].classList.remove('bomb');
+            gridDivs[currentShootIndex].classList.add('explosion');
 
             bombsRemoved.push(bombs.indexOf(currentShootIndex))
-            clearInterval(setIntervalIndex)
-        } else{
-
-                
-        gridDivs[currentShootIndex].classList.add('shoot')
-    }   
-        
+            clearInterval(shootIntervalId)
+        } else {
+            gridDivs[currentShootIndex].classList.add('shoot')
+        }
     }
 
     if (event.code == 'Space') {
@@ -119,12 +117,12 @@ function moveBombs(bombsList) {
     }
     drawBombs(bombsList)
 
-    if(bombsList.length == bombsRemoved.length){
+    if (bombsList.length == bombsRemoved.length) {
         alert('win')
         clearInterval(gameLoopId);
     }
-    if(bombsList[bombsList.length-1] > 210){
-        alert ('ви програли')
+    if (bombsList[bombsList.length - 1] > 210) {
+        alert('ви програли')
         clearInterval(gameLoopId);
     }
 }
