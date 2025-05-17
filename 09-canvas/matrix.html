@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="matrix.css">
     <title>Matrix</title>
+    <link rel="stylesheet" href="matrix.css">
 </head>
 <body>
     <header>
@@ -19,9 +20,8 @@
             </ul>
         </naw>
     </header>
-    <nain>
-        <canvas id="matrix-bg" width="" hidden="">
-        </canvas>
+    <canvas id="matrix-bg" width="1200" height="640"></canvas>
+    <main>
         <div>
             <h2>The matrix 4:
                 Cast, relace date,
@@ -32,6 +32,19 @@
                  ..text... ..text... ..text... ..text...
             </p>
         </div>
-    </nain>
+        <div>
+            <div class="canvas444">
+        <canvas id="canvas1" width="300" height="200"></canvas>
+        <canvas id="canvas2" width="300" height="200"></canvas>
+    </div>
+    <div>
+        <p id="left-button"><img src="img-1/left-arrow.png"></p>
+        <canvas id="canvas3" width="400" height="400"></canvas>
+        <p id="right-button"><img src="img-1/right-arrow.png"></p>
+    </div>
+        </div>
+    </main>
+    <script src="matrix.js"></script>
+    <script src="canvas.js"></script>
 </body>
 </html>
