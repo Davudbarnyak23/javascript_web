@@ -1,0 +1,74 @@
+
+
+/*@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap')
+*/
+body {
+    background-image: linear-gradient(to right, rgb(8, 7, 51), rgb(25, 0, 255), rgb(8, 7, 51));
+
+}
+
+header {
+    height: 650px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: center;
+    text-align: center;
+    background-image: url('../img/main_back.png');
+    background-repeat: no-repeat;
+    background-position: top 50, left 50px;
+    margin-right: 80px;
+}
+h1 { font-size: 60px;
+    color: aqua;
+    padding: 30px;
+}
+
+.menuContainer {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 80px;
+    height: 100%;
+    background-color: aquamarine;
+    z-index: 10;
+}
+
+.menuTriger {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.menuTrigerLines {
+    width: 40px;
+    height: 3px;
+    background-color: deeppink;
+    position: relative;
+}
+
+.menuTrigerLines::before,
+.menuTrigerLines::after{
+    content: '';
+    width: 40px;
+    height: 3px;
+    position: absolute;
+    right: 0;
+    background-color: deeppink;
+}
+
+.menuTrigerLines::before{top: -10px;}
+.menuTrigerLines::after{top: 10px;}
+
+
+header nav {
+    display: none;
+
+}
