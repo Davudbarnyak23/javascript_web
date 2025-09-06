@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>javaScript Functions</h1>
+        
+        <script>
+        function greet(name, lastName) {
+            console.log('Hello ' + name + ' ' + lastName);
+        }
+        greet('John', 'Doe');
+
+        function greetUser(user) {
+            console.log('Hello ' + user.firstName + ' ' + user.lastName);
+        }
+        
+        function greet(name = 'Guest', lastName = 'User') {
+            console.log('Hello ' + name + ' ' + lastName);
+        }
+        greet(); // Uses default values
+
+        let a = [1, 2, 3];
+        
+        a.reduce((accumulator, current) => accumulator + current, 0);
+
+
+        function divide(a, b) {
+            if (b === 0) {
+                console.log('Error: Division by zero');
+                return null;
+            }
+            return a / b;
+        }
+
+        // ...existing code...
+
+            function createUser(name, age) {
+                return {
+                    name: name,
+                    age: age
+                };
+            }
+
+            const square = function(x) {
+                return x * x;
+            };
+
+            console.log(square(5)); // 25
+
+
+        console.log(divide(10, 2)); 
+        console.log(divide(7, 0));  // Error: Division by zero
+
+
+        const factorial = function factorial(n) {
+            if (n <= 1) return 1;
+            return n * factorial(n - 1);
+        };
+        </script>
+</body>
+</html>

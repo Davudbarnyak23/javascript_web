@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Js Classes</title>
+</head>
+<body>
+    <h1>JavaScript Classes</h1>
+    <script>
+        class User {
+            constructor(name, age) {
+                this.name = name;
+                this.age = age;
+            }
+
+            greet() {
+                console.log(`Hello, my name is ${this.name} and I'm ${this.age} years old.`);
+            }
+
+            haveBirthday() {
+                this.age += 1;
+                console.log(`Happy birthday ${this.name}! You are now ${this.age}.`);
+            }
+        }
+
+        const user1 = new User('Alice', 30);
+        user1.greet(); // Hello, my name is Alice and I'm 30 years old.
+        user1.haveBirthday(); // Happy birthday Alice! You are now 31.
+
+        const user2 = new User('Bob', 25);
+        user2.greet(); // Hello, my name is Bob and I'm 25 years old.
+        user2.haveBirthday(); // Happy birthday Bob! You are now 26.
+
+    </script>
+    
+</body>
+</html>
