@@ -122,3 +122,4 @@ document.addEventListener('DOMContentLoaded', ()=>{
     const gallery = new PhotoGallery
     gallery.showPictures();
 })
+
