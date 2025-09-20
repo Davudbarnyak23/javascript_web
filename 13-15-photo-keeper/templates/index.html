@@ -40,7 +40,46 @@
 								<img src="" class="uploadImage">
 							</div>
 
+							<div class="uploadEffectLevel">
+								<input type="range" class="head" min="0" max="300" value="0" step="1" id="effectLevel">
+								<label for="effetcLevel">
+									<div id="effectLevelLine">
+										<div id="effectLevelPin"></div>
+										<div id="effectLevelProgressLine"></div>
+									</div>
+								</label>
+								</div>
 							<fieldset class="uploadEffectFieldset"></fieldset>
+							    <input type="radio" name="effect" id="uploadEffectNone" value="none" class="hidden" checked>
+								<label for="uploadEffectNone" class="uploadEffectLabel" title="Без ефекту">
+									<div class="uploadEffectNone uploadEffectPreview"></div>
+								</label>
+
+								<input type="radio" name="effect" id="uploadEffectChrome" value="sepia" class="hidden">
+								<label for="uploadEffectChrome" class="uploadEffectLabel" title="Сепія">									
+									<div class="uploadEffectChrome uploadEffectPreview"></div>
+								</label>
+
+								<input type="radio" name="effect" id="uploadEffectSepia" value="chrome" class="hidden">
+								<label for="uploadEffectSepia" class="uploadEffectLabel" title="Чорно-білий">									
+									<div class="uploadEffectSepia uploadEffectPreview"></div>
+								</label>
+
+								<input type="radio" name="effect" id="uploadEffectMarvin" value="marvin" class="hidden">
+								<label for="uploadEffectMarvin" class="uploadEffectLabel" title="Інверсія">									
+									<div class="uploadEffectMarvin uploadEffectPreview"></div>
+								</label>
+
+								<input type="radio" name="effect" id="uploadEffectPhobos" value="saturate" class="hidden">
+								<label for="uploadEffectPhobos" class="uploadEffectLabel" title="Насиченість">									
+									<div class="uploadEffectPhobos uploadEffectPreview"></div>
+								</label>
+
+								<input type="radio" name="effect" id="uploadEffectHeat" value="contrast" class="hidden">
+								<label for="uploadEffectHeat" class="uploadEffectLabel" title="Контрастність">									
+									<div class="uploadEffectHeat uploadEffectPreview"></div>
+								</label>
+							</fieldset>
 
 							<div>
 								<button class="uploadFormButton active" type="reset" id="uploadCancel">ВІДМІНА</button>

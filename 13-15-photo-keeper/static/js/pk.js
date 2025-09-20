@@ -138,9 +138,51 @@ class PhotoGallery{
 
 }
 
+class ImageUploader{
+    constructor(){
+        this.inputFile = document.getElementById('inputUploadFile');
+        this.uploadImageOverlay = document.querySelector('.uploadImageOverlay');
+        this.uploadImage = document.querySelector('.uploadImage');
+        this.uploadEffectFielset = document.querySelector('.uploadEffectFieldset');
+        this.buttonCloseUpload = document.getElementById('uploadCancel');
+
+        console.log(this.uploadEffectFielset);
+
+        this.currentEffect = 'none';
+
+        this.initEventListeners();
+    }
+    initEventListeners(){
+        this.inputFile.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (file && file.type.includes('image')){
+                const reader = new FileReader();
+                reader.readAsDataURL(file);
+                reader.onload = (event) => {
+                    this.uploadImage.src = event.target.result;
+
+                    const labelsEffectSettings =
+                        document.querySelectorAll('.uploadEffectPreview');
+                    
+                    console.log(labelsEffectSettings, this.uploadEffectFielset);    
+                    labelsEffectSettings.forEach( (label) => {
+                        label.style.backgroundImage = `url(${event.target.result})`;
+                    });
+
+                    this.uploadImageOverlay.classList.remove('hidden');
+                }
+            }
+        });
+        this.buttonCloseUpload.addEventListener('click', (e) => {
+            this.uploadImageOverlay.classList.add('hidden');
+        });
+}}
+
 
 document.addEventListener('DOMContentLoaded', ()=>{
     new MainMenu('.menuTrigger', '.mainMenuContainer')    
     const gallery = new PhotoGallery
     gallery.showPictures();
+
+    const uploader = new ImageUploader();
 });
