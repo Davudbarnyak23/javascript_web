@@ -42,13 +42,13 @@ class PhotoGallery{
             'Що це, якщо не любов? Х)'
         ];
         this.picturesDB = this.generatePicturesDB(25)
-        //console.log(this.picturesDB)
+        console.log(this.picturesDB)
         this.pictureContainer = document.querySelector('.picturesContainer')
         this.openedPictureContainer = document.querySelector('.openedPictureContainer')
         this.closeButton = document.querySelector('.closeButton')
 
+        this.commentsContainer = document.querySelector('.pictureCommentsContainer') || document.createElement('div');
         this.initEventListeners();
-        this.commentsContainer = document.querySelector('.pictureCommentsContainer') || document.createElement('div'); 
     }
     randomElement(array){
         return array[Math.floor(Math.random() * array.length)]
@@ -92,6 +92,8 @@ class PhotoGallery{
         // console.log(pictureExample)
     }
     showCheckedPicture(picture){
+        console.log(picture);
+
         this.openedPictureContainer.querySelector('.openedPictureImg').src = picture.src
         this.openedPictureContainer.querySelector('.openedPictureImg').style.filter = picture.effect
         this.openedPictureContainer.querySelector('.descriptionText').innerText = picture.description
@@ -99,31 +101,22 @@ class PhotoGallery{
         this.openedPictureContainer.querySelector('.pictureComments').innerText = picture.commentsNumber
         
         const commentTemplate = document.getElementById('commentTemplate')
-        console.log('0002: ',commentTemplate)
-        const commentExample = commentTemplate.content.querySelector('.commentBlock')
+        const commentExample = commentTemplate.content.querySelector('.commentBlock');
         this.commentsContainer.innerText = '';
-
-        console.log('0001: ',commentExample)
+        
         picture.comments.forEach( (commentText) => {
-            const comment = commentExample.cloneNode(true)
-            comment.querySelector('.commentText').innerText = commentText
-            this.commentsContainer.append(comment)
+            const comment = commentExample.cloneNode(true);
+            comment.querySelector('.commentText').innerText = commentText;
+            this.commentsContainer.append(comment);
         });
 
         this.openedPictureContainer.classList.remove('hidden');
-
     }
-    
-
     initEventListeners(){
-        this.pictureContainer.addEventListener('click', (e) => {
+        this.pictureContainer.addEventListener('click', (e) => {            
             if (e.target.classList.contains('pictureImg')) {
-                //const src = e.target.src
-                const src = e.target.getAttribute('src')
-                const picture = this.picturesDB.find( (pic) => pic.src === src)
-
-                console.log(picture);
-               
+                const src = e.target.getAttribute('src');
+                const picture = this.picturesDB.find((pic) => pic.src === src)
                 if (picture){
                     this.showCheckedPicture(picture);
                 }
@@ -134,54 +127,92 @@ class PhotoGallery{
             this.openedPictureContainer.classList.add('hidden');
             this.commentsContainer.innerText = '';
         });
-    }
 
+
+        this.randomElement([])
+
+    }
 }
 
 class ImageUploader{
     constructor(){
-        this.inputFile = document.getElementById('inputUploadFile');
+        this.inputUploadFile = document.getElementById('inputUploadFile');
         this.uploadImageOverlay = document.querySelector('.uploadImageOverlay');
         this.uploadImage = document.querySelector('.uploadImage');
-        this.uploadEffectFielset = document.querySelector('.uploadEffectFieldset');
+        this.uploadEffectFieldset = document.querySelector('.uploadEffectFieldset');
         this.buttonCloseUpload = document.getElementById('uploadCancel');
 
-        console.log(this.uploadEffectFielset);
-
+        this.effectSlider = document.getElementById('effectLevel');
         this.currentEffect = 'none';
-
         this.initEventListeners();
     }
     initEventListeners(){
-        this.inputFile.addEventListener('change', (e) => {
+        this.inputUploadFile.addEventListener('change', (e) => {    
             const file = e.target.files[0];
-            if (file && file.type.includes('image')){
+            if (file && file.type.includes('image')) {
                 const reader = new FileReader();
                 reader.readAsDataURL(file);
-                reader.onload = (event) => {
-                    this.uploadImage.src = event.target.result;
-
-                    const labelsEffectSettings =
-                        document.querySelectorAll('.uploadEffectPreview');
+                reader.onload = () => {
+                    this.uploadImage.src = reader.result;
                     
-                    console.log(labelsEffectSettings, this.uploadEffectFielset);    
-                    labelsEffectSettings.forEach( (label) => {
-                        label.style.backgroundImage = `url(${event.target.result})`;
+                    const labelsEffectSettings = 
+                        this.uploadEffectFieldset.querySelectorAll('.uploadEffectPreview');
+
+                    //console.log(labelsEffectSettings, this.uploadEffectFieldset);    
+                    labelsEffectSettings.forEach( (label) => {    
+                        label.style.backgroundImage = `url(${reader.result})`;
                     });
 
                     this.uploadImageOverlay.classList.remove('hidden');
-                }
+                };
+            }
+            else {
+                alert('Будь ласка, виберіть файл зображення.');
             }
         });
+
         this.buttonCloseUpload.addEventListener('click', (e) => {
             this.uploadImageOverlay.classList.add('hidden');
         });
-}}
 
+        this.uploadEffectFieldset.addEventListener('change', (e) => {
+            console.log(e.target);
+            if(e.target.type !== 'radio') return;
+
+            const activeLabel = this.uploadEffectFieldset.querySelector('.inputActive');
+            if (activeLabel) activeLabel.classList.remove('inputActive');
+
+            this.uploadEffectFieldset.querySelector(`[for=${e.target.id}]`).classList.add('inputActive');
+            this.currentEffect = e.target.value;
+            
+            const min = parseInt(e.target.min);
+            const max = parseInt(e.target.max);
+            
+            this.effectSlider.min = min;
+            this.effectSlider.max = max;
+            this.effectSlider.value = min;
+
+            this.applyEffect();
+        });
+
+        this.effectSlider.addEventListener('input', (e) => {
+            this.applyEffect();
+        });
+    }
+    applyEffect(){
+        const value = this.effectSlider.value;
+        if (this.uploadImage && this.currentEffect !== 'none'){
+            this.uploadImage.style.filter = `${this.currentEffect}(${value}%)`;                                            
+        } else if (this.uploadImage) {
+            this.uploadImage.style.filter = 'none';
+        }
+    }
+}
 
 document.addEventListener('DOMContentLoaded', ()=>{
-    new MainMenu('.menuTrigger', '.mainMenuContainer')    
-    const gallery = new PhotoGallery
+    new MainMenu('.menuTrigger', '.mainMenuContainer');    
+    
+    const gallery = new PhotoGallery;
     gallery.showPictures();
 
     const uploader = new ImageUploader();
